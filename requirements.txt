@@ -1,0 +1,34 @@
+# Core
+numpy
+pandas
+scipy
+
+# Visualization
+matplotlib
+seaborn
+
+# ML
+scikit-learn
+xgboost
+
+# Computer Vision (light)
+pillow
+opencv-python-headless
+
+# Notebooks
+jupyterlab
+ipykernel
+tqdm
+
+# IO
+openpyxl
+pyarrow
+
+# API / Deployment
+fastapi
+uvicorn
+pydantic
+
+# Utils
+joblib
+python-dotenv
