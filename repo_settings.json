@@ -1,0 +1,21 @@
+{
+	"go.toolsManagement.checkForUpdates": "local",
+	"go.useLanguageServer": true,
+	"go.gopath": "/go",
+	"python.defaultInterpreterPath": "/bin/python3",
+	"lldb.executable": "/usr/bin/lldb",
+	"github.copilot.chat.codeGeneration.instructions": [
+		{
+			"text": "This workspace is in a dev container running on \"Ubuntu 24.04.3 LTS\".\n\nUse `\"$BROWSER\" <url>` to open a webpage in the host's default browser.\n\nSome of the command line tools available on the `PATH`: `apt`, `dpkg`, `docker`, `git`, `gh`, `kubectl`, `curl`, `wget`, `ssh`, `scp`, `rsync`, `gpg`, `ps`, `lsof`, `netstat`, `top`, `tree`, `find`, `grep`, `zip`, `unzip`, `tar`, `gzip`, `bzip2`, `xz`"
+		}
+	],
+	"jupyter.kernels.excludePythonEnvironments": [
+		"/opt/conda/bin/python",
+		"/bin/python2",
+		"/usr/bin/python2",
+		"/usr/local/python/current/bin/python3",
+		"/usr/local/python/current/bin/python",
+		"/usr/bin/python3",
+		"/bin/python3"
+	]
+}

@@ -1,0 +1,94 @@
+{
+    "oracledevtools.connectionConfiguration.configFilesFolder": "C:\\Users\\Administrator\\Oracle\\network\\admin",
+    "oracledevtools.connectionConfiguration.walletFileFolder": "C:\\Users\\Administrator\\Oracle\\network\\admin",
+    "[oraclesql]": {
+        "editor.suggest.showSnippets": true,
+        "editor.quickSuggestions": {
+            "comments": "on",
+            "strings": "on",
+            "other": "on"
+        }
+    },
+    "oracledevtools.bookmarkFileFolder": "C:\\Users\\Administrator\\Oracle\\oracle.oracledevtools",
+    "oracledevtools.download.otherFolder": "C:\\Users\\Administrator\\downloads",
+    "workbench.colorTheme": "Ayu Dark",
+    "redhat.telemetry.enabled": true,
+    "php.validate.executablePath": "",
+    "tabnine.experimentalAutoImports": true,
+    "editor.fontWeight": "bold",
+    "security.workspace.trust.untrustedFiles": "open",
+    "python.defaultInterpreterPath": "D:\\Python312\\python.exe",
+    "settingsSync.ignoredSettings": [
+        "-python.defaultInterpreterPath"
+    ],
+    "workbench.settings.applyToAllProfiles": [
+
+        "python.defaultInterpreterPath"
+    ],
+    "python.dataScience.jupyterPlotlyUseNativeRenderer": true,
+    "python.dataScience.sendSelectionToInteractiveWindow": true,
+    "workbench.productIconTheme": "emoji-product-icons-fun",
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "Local MySQL",
+            "group": "Local",
+            "database": "employees",
+            "username": "root",
+            "connectionTimeout": 15,
+            "password": ""
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "Producction MySQL",
+            "group": "Admin",
+            "database": "Orders",
+            "username": "root",
+            "connectionTimeout": 15
+        }
+    ],
+    "sqldeveloper.sqlHistory.historyLimit": 500,
+    "github.copilot.advanced": {},
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": false,
+        "markdown": true,
+        "scminput": false,
+        "python": false
+    },
+    "editor.renderWhitespace": "trailing",
+    "editor.fontSize": 18,
+    "jupyter.widgetScriptSources": [
+        "jsdelivr.com",
+        "unpkg.com"
+    ],
+    "editor.codeActionsOnSave": {
+        
+    },
+    "security.allowedUNCHosts": [
+        "wsl$"
+    ],
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "python.analysis.typeCheckingMode": "strict",
+    "editor.pasteAs.preferences": [
+        
+    ],
+    "sqldeveloper.datagrid.fontFamily": "Consolas, 'Courier New', monospace",
+    "workbench.iconTheme": "file-icons",
+    "files.autoSave": "afterDelay",
+    "workbench.colorCustomizations": {}
+}
