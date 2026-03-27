@@ -62,8 +62,7 @@ class BM25:
 
                 # Count Term Frequencies
                 # ----------------------
-
-                freq = defaultdict(int)
+                freq: defaultdict[Any,int] = defaultdict(int)
                 for token in tokens:
                     freq[token] += 1 
                     self.term_to_docs[token].add(idx)
@@ -71,10 +70,12 @@ class BM25:
                 self.doc_freqs.append(dict(freq))
 
             self.avg_doc_len = total_len / self.corpus_size if self.corpus_size > 0 else 0
+            # If the Average Document length is greater than zero then total length is averaged by the corpus size
+            # If not then it is zero (0).
+
 
             # Calculate IDF (Inverse Document Frequency)
             # ------------------------------------------
-
             for term,docs in self.term_to_docs.items():
                 n_t = len(docs)
                 # BM25 IDF: log(1 + (N - n(t) + 0.5) / (n(t) + 0.5))
@@ -90,7 +91,6 @@ class BM25:
 
     """
         Calculate BM25 score for one document.
-        
         score = sum of IDF(t) * (f(t,D) * (k1 + 1)) / (f(t,D) + k1 * (1 - b + b * |D|/avgdl))
     """
     def _score(self,
