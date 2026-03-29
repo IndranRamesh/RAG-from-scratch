@@ -1,3 +1,5 @@
+# ------------------------- SAMPLE CHECK -------------------------------
+
 # import os 
 # from groq import Groq
 # from dotenv import load_dotenv
@@ -18,12 +20,19 @@
 
 # print(response.choices[0].message.content)
 
+# ------------------------- SAMPLE CHECK -------------------------------
+
 import os 
 import sys 
 from groq import Groq
 from dotenv import load_dotenv
+from typing import Any
+
+# pdf_loader import 
+from pdf_loader import load_pdf
 
 # Import BM25
+# -----------
 
 sys.path.append(
             os.path.dirname(
@@ -41,13 +50,17 @@ load_dotenv()
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 # ---------- Knowledge Base ----------
-documents = [
-    {"title": "RAG Definition", "text": "RAG stands for Retrieval Augmented Generation. It was introduced by Meta AI in 2020."},
-    {"title": "Vector DB", "text": "Vector databases store embeddings which are numerical representations of text."},
-    {"title": "Chunking", "text": "Chunking strategy is critical. Too small loses context, too large loses precision."},
-    {"title": "BM25", "text": "BM25 is a keyword based ranking function used in information retrieval systems."},
-    {"title": "Embeddings", "text": "Embeddings capture semantic meaning. King and Queen are close in embedding space."},
-]
+# documents = [
+#     {"title": "RAG Definition", "text": "RAG stands for Retrieval Augmented Generation. It was introduced by Meta AI in 2020."},
+#     {"title": "Vector DB", "text": "Vector databases store embeddings which are numerical representations of text."},
+#     {"title": "Chunking", "text": "Chunking strategy is critical. Too small loses context, too large loses precision."},
+#     {"title": "BM25", "text": "BM25 is a keyword based ranking function used in information retrieval systems."},
+#     {"title": "Embeddings", "text": "Embeddings capture semantic meaning. King and Queen are close in embedding space."},
+# ]
+
+# Load using the load_pdf function
+
+documents = load_pdf(path=r"D:\bm25-war\Arul_ML_Metrics_And_Fundamentals_Guide.md.pdf")
 
 # ---------- Index with BM25 ----------
 
@@ -61,8 +74,8 @@ retriever.fit(documents)
 # ------------------------------
 
 def ask(question: str):
-    # Step 1: Retrieve
-    results = retriever.search(question,top_k=2)
+    # Step 1: Retrieve (call the function search)
+    results = retriever.search(question,top_k=5)
     context = "\n".join([r['preview'] for r in results])
 
     # Step 2: Build prompt
@@ -91,6 +104,16 @@ Answer:"""
     print(f"Answer: {response.choices[0].message.content}")
 
 # ---------- Test ----------
-ask("What is RAG?")
-ask("Why is chunking important?")
-ask("Who invented the telephone?")  # Not in knowledge base
+
+# For the sample documents dict 
+# -----------------------------
+# ask("What is RAG?")
+# ask("Why is chunking important?")
+# ask("Who invented the telephone?")  # Not in knowledge base
+
+# For using the pdf_loader
+# ------------------------
+ask("What is the difference between precision and recall?")
+ask("When should I use RMSE over MAE?")
+ask("What is the bias variance tradeoff?")
+ask("What is the capital of France?")  # Not in PDF
