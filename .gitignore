@@ -201,7 +201,20 @@ cython_debug/
 .cursorignore
 .cursorindexingignore
 
+# Local project artifacts and machine-generated files
+.env.*
+local_settings.json
+repo_settings.json
+.DS_Store
+**/.DS_Store
+**/__MACOSX/
+.vscode/
+.idea/
+
 # Marimo
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+uv.lock
+pyproject.toml

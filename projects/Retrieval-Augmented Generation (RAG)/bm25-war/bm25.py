@@ -15,9 +15,9 @@ import random
 
 class BM25:
     def __init__(self,
-                 k1=1.5,
-                 b=0.75
-                 ) -> None:
+                k1=1.5,
+                b=0.75
+                ) -> None:
         
         self.k1:float = k1
         self.b:float = b
@@ -32,7 +32,7 @@ class BM25:
         self.term_to_docs: Dict[str, Set[int]] = defaultdict(set)
     
     def _tokenize(self,
-                  text) -> list[Any]: 
+                text) -> list[Any]: 
         """
         Extract words. Lowercase. Min length 3.
         Regex: \b[a-zA-Z]{3,}\b  
@@ -40,7 +40,7 @@ class BM25:
         #  The minimum length is limited to 3
 
         return [t.lower() for t in re.findall(pattern=r'\b[a-zA-Z]{3,}\b',
-                                              string=text.lower())]
+                                            string=text.lower())]
 
     
     def fit(self,
@@ -94,8 +94,8 @@ class BM25:
         score = sum of IDF(t) * (f(t,D) * (k1 + 1)) / (f(t,D) + k1 * (1 - b + b * |D|/avgdl))
     """
     def _score(self,
-               query_terms,
-               doc_idx):
+            query_terms,
+            doc_idx):
         
         try:
             # Initialize the score as zero
@@ -136,8 +136,8 @@ class BM25:
     Must complete in <1 second for 10k documents.
     """
     def search(self,
-               query,
-               top_k = 5):
+            query,
+            top_k = 5):
         try:
             query_terms = self._tokenize(text=query)
 
