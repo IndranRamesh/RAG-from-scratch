@@ -42,7 +42,28 @@ class BM25:
         return [t.lower() for t in re.findall(pattern=r'\b[a-zA-Z]{3,}\b',
                                             string=text.lower())]
 
+    """
+    fit() method is used to index all documents. It takes a list of documents as input and performs the following steps:
     
+    Step 1: For each document, 
+    the text first (you can't count anything 
+    before you have clean tokens)
+
+    Step 2: From those tokens, 
+    calculate that document's length (doc_len = len(tokens)) — this comes right after tokenizing, 
+    using the tokens you just made
+
+    Step 3: Count term frequencies within that document (how many times each word appears) —
+    AND simultaneously build the inverted index (term_to_docs) — which document IDs contain which terms
+
+    Step 4: After processing ALL documents,
+    calculate the average document length across the whole corpus
+
+    Step 5: Finally, calculate IDF for every unique term — 
+    this needs to happen LAST because IDF requires knowing 
+    how many total documents exist and how many contain each term,
+    which you only know after processing everything
+    """
     def fit(self,
             documents):
         try:
@@ -77,7 +98,7 @@ class BM25:
             # Calculate IDF (Inverse Document Frequency)
             # ------------------------------------------
             for term,docs in self.term_to_docs.items():
-                n_t = len(docs)
+                n_t = len(docs) 
                 # BM25 IDF: log(1 + (N - n(t) + 0.5) / (n(t) + 0.5))
                 self.idf[term] = math.log(1 + (self.corpus_size - n_t + 0.5) / (n_t + 0.5))
         
