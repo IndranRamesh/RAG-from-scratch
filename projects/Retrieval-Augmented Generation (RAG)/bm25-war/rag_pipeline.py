@@ -1,6 +1,6 @@
 # ------------------------- SAMPLE CHECK -------------------------------
 
-# import os 
+# import os
 # from groq import Groq
 # from dotenv import load_dotenv
 
@@ -10,7 +10,7 @@
 
 # response = client.chat.completions.create(
 #     # model="llama3-8b-8192",  # version 1
-#     # model="llama-3.1-8b-instant",  # version 2 
+#     # model="llama-3.1-8b-instant",  # version 2
 #     model="meta-llama/llama-4-scout-17b-16e-instruct",
 #     messages=[
 #         {"role":"user",
@@ -22,28 +22,24 @@
 
 # ------------------------- SAMPLE CHECK -------------------------------
 
-import os 
-import sys 
+import os
+import sys
 from groq import Groq
 from dotenv import load_dotenv
+
 # from typing import Any
 from bm25 import BM25
-from vector_store import store_chunks,search_chroma
+from vector_store import store_chunks, search_chroma
 from hybrid_search import reciprocal_rank_fusion
 
 
-# pdf_loader import 
+# pdf_loader import
 from pdf_loader import load_pdf
 
 # Import BM25
 # -----------
 
-sys.path.append(
-            os.path.dirname(
-                os.path.abspath(__file__)
-            )
-        )
-
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 
 # load the .env file
@@ -97,7 +93,7 @@ documents = load_pdf(path=pdf_path)
 
 # Question: {question}
 # Answer:"""
-    
+
 #     response = client.chat.completions.create(
 #         model="meta-llama/llama-4-scout-17b-16e-instruct",
 #         messages=[
@@ -107,7 +103,7 @@ documents = load_pdf(path=pdf_path)
 #                     }
 #                 ]
 #             )
-    
+
 
 #     print(f"\nQuestion: {question}")
 #     print(f"Context used: {[r['title'] for r in results]}")
@@ -122,24 +118,21 @@ bm25.fit(documents)
 
 store_chunks(documents)
 
-title_to_text = {doc['title']: doc['text'] for doc in documents}
+title_to_text = {doc["title"]: doc["text"] for doc in documents}
 
-def ask_hybrid(question:str,
-            top_k=5):
-    
-    bm25_results = bm25.search(question,
-                            top_k=top_k)
-    
-    chroma_results = search_chroma(question,
-                                top_k=top_k)
-    
-    ranked = reciprocal_rank_fusion(bm25_results, 
-                                    chroma_results)
-    
+
+def ask_hybrid(question: str, top_k=5):
+
+    bm25_results = bm25.search(question, top_k=top_k)
+
+    chroma_results = search_chroma(question, top_k=top_k)
+
+    ranked = reciprocal_rank_fusion(bm25_results, chroma_results)
+
     top_titles = [title for title, score in ranked[:top_k]]
-    
+
     context = "\n".join([title_to_text[title] for title in top_titles])  # Fill this in
-    
+
     prompt = f"""Answer the question using ONLY the context below.
 If the answer is not in the context, say "I don't know."
 
@@ -148,21 +141,21 @@ Context:
 
 Question: {question}
 Answer:"""
-    
+
     response = client.chat.completions.create(
-        model=GROQ_MODEL,
-        messages=[{"role": "user", "content": prompt}]
+        model=GROQ_MODEL, messages=[{"role": "user", "content": prompt}]
     )
-    
+
     print(f"\nQuestion: {question}")
     print(f"Chunks used: {top_titles}")
     print(f"Answer: {response.choices[0].message.content}")
+
 
 # ------------------------------------HYBRID SEARCH---------------
 
 # ---------- Test ----------
 
-# For the sample documents dict 
+# For the sample documents dict
 # -----------------------------
 # ask("What is RAG?")
 # ask("Why is chunking important?")

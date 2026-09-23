@@ -1,13 +1,13 @@
-import os 
-import sys 
-from pypdf import PdfReader 
+import os
+import sys
+from pypdf import PdfReader
 from typing import Any
 
 # def load_pdf(path:str) -> list[dict]:
 #     """Load a PDF and return a list of documents (one per page)."""
 
 #     # fit the pdfreader function in this variable
-#     reader = PdfReader(stream=path) 
+#     reader = PdfReader(stream=path)
 #     documents = []
 
 #     for i , page in enumerate(reader.pages):
@@ -17,9 +17,9 @@ from typing import Any
 #                 "title":f"Page_{i+1}",
 #                 "text":text
 #             })
-    
+
 #     print(f"Loaded {len(documents)} pages from PDF")
-#     return documents 
+#     return documents
 
 # def load_pdf(path: str) -> list:
 #     reader = PdfReader(stream=path)
@@ -52,19 +52,19 @@ def load_pdf(path: str) -> list:
         if not text.strip():
             continue
 
-        lines = [l.strip() for l in text.split('\n') if len(l.strip()) > 20]
-        
+        lines = [l.strip() for l in text.split("\n") if len(l.strip()) > 20]
+
         # Group every 5 lines into one chunk
         chunk_size = 5
         for j in range(0, len(lines), chunk_size):
-            chunk = " ".join(lines[j:j+chunk_size])
-            documents.append({
-                "title": f"Page_{i+1}_Chunk_{j//chunk_size+1}",
-                "text": chunk
-            })
+            chunk = " ".join(lines[j : j + chunk_size])
+            documents.append(
+                {"title": f"Page_{i + 1}_Chunk_{j // chunk_size + 1}", "text": chunk}
+            )
 
     print(f"Loaded {len(documents)} chunks from PDF")
     return documents
+
 
 # To view the output in CMD
 # -------------------------

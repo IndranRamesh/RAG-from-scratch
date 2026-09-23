@@ -216,5 +216,9 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 
+# Keep project metadata tracked, but leave the machine-resolved lock file local
 uv.lock
-pyproject.toml
+# pyproject.toml
+
+# Ignore workspace settings file (machine-specific)
+.vscode/settings.json

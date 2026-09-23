@@ -11,10 +11,7 @@ documents = load_pdf(path="Arul_ML_Metrics_And_Fundamentals_Guide.md.pdf")
 store_chunks(documents)
 
 # Step 3: Test search
-results = search_chroma("What is precision and recall?") # Question
+results = search_chroma("What is precision and recall?")  # Question
 
 # Step 4: Print the output in CLI
-print(json.dumps(results,indent=4))
-
-
-
+print(json.dumps(results, indent=4))
